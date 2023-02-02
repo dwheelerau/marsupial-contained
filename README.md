@@ -11,4 +11,16 @@ This repo creates a docker image that allows users to run [Marsupial.au](https:/
 - authors claim that the latest model can reliably detect 72 species
 
 # Creating the image and running the container
+To build this file:  
 
+```
+sudo docker build -f Dockerfile . -t dwheelerau/marsupial:ubuntu2004
+```
+
+The following Mounts your current host directory in the container directory,
+at /project, and runs the `prediction_batch.py` script with demo settings.  
+
+ 
+```
+sudo docker run --gpus all -it -v `pwd`:/project dwheelerau/marsupial:ubuntu2004 /bin/bash -c "cd /project && python /build/marsupial/prediction_batch.py -i /build/marsupial/data -m /build/marsupial/weights/marsupial_72s.pt -o processed_images"
+```
