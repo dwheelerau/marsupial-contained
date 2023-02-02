@@ -5,6 +5,20 @@ This repo creates a docker image that allows users to run [Marsupial.au](https:/
 
 [Marsupial.au](https://github.com/Sydney-Informatics-Hub/marsupial) is a camera trap processing pipeline based on [megadetector v5](https://github.com/microsoft/CameraTraps) that was developed by the [Sydney Uni data hub](https://github.com/Sydney-Informatics-Hub). 
 
+If you use this script you should cite the marsupial.au paper as well as Megadetector!The citation for megadetector itself is:  
+
+ToDo: find masupial.ai citation  
+
+```
+@article{beery2019efficient,
+  title={Efficient Pipeline for Camera Trap Image Review},
+  author={Beery, Sara and Morris, Dan and Yang, Siyu},
+  journal={arXiv preprint arXiv:1907.06772},
+  year={2019}
+}
+
+```
+
 ## How is Marsupial.ai different from megadetector  
 - animal detection as well as classification for common animals found in Australia
 - trained on the wild count dataset from NSW Parks
