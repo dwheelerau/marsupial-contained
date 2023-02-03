@@ -48,8 +48,5 @@ RUN python -m pip install --upgrade pip
 RUN pip --version
 RUN pip install gradio torch pandas numpy torchvision wandb jupyterlab kaggle opencv-python seaborn scipy
 #RUN conda install Pillow=9.1.0 nb_conda_kernels ipykernel tqdm jsonpickle humanfriendly numpy matplotlib opencv requests pandas seaborn>=0.11.0 PyYAML>=5.3.1 pytorch::pytorch=1.10.1 pytorch::torchvision=0.11.2 conda-forge::cudatoolkit=11.2 conda-forge::cudnn=8.1 -c conda-forge
-# cache torch
-RUN mkdir -p /root/.cache/torch/hub/
-RUN curl -o /root/.cache/torch/hub/master.zip https://github.com/ultralytics/yolov5/zipball/master
 
 CMD /bin/bash
