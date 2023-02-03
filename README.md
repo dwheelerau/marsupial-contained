@@ -6,13 +6,13 @@ This repo creates a docker image that allows users to run [Marsupial.au](https:/
 
 [Marsupial.au](https://github.com/Sydney-Informatics-Hub/marsupial) is a camera trap processing pipeline based on [megadetector v5](https://github.com/microsoft/CameraTraps) that was developed by the [Sydney Uni data hub](https://github.com/Sydney-Informatics-Hub). 
 
-The current model descriptions from the authors are shown below (these can be specified by `-m /build/marsupial/weights/MODEL_FILENAME.pt`. The `marsupial_72s.pt` is the default model.  
+The current model descriptions from the authors are shown below (these can be specified by `-m /build/marsupial/weights/MODEL_FILENAME.pt`). The `marsupial_72s.pt` is the default model.  
 
-marsupial_detector: This model is a pure animal detector, and simply finds any animal in an image.
-marsupial_16s: This model can identify 16 species of animal, with extremely high precision and recall.
-marsupial_33s: This model can identify 33 species, with very high precision and recall.
-marsupial_41s: This model can identify 41 species, and is a great balance between pure performance and detailed predictions.
-marsupial_72s: This model can identify 72 species, and is our most detailed predictor while still delivering stare of the art performance.
+marsupial_detector: This model is a pure animal detector, and simply finds any animal in an image.  
+marsupial_16s: This model can identify 16 species of animal, with extremely high precision and recall.  
+marsupial_33s: This model can identify 33 species, with very high precision and recall.  
+marsupial_41s: This model can identify 41 species, and is a great balance between pure performance and detailed predictions.  
+marsupial_72s: This model can identify 72 species, and is our most detailed predictor while still delivering stare of the art performance.  
 
 If you use this script you should cite the marsupial.au paper as well as Megadetector!The citation for megadetector itself is:  
 
