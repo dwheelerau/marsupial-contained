@@ -46,7 +46,7 @@ RUN git clone https://github.com/dwheelerau/marsupial
 # install dependencies
 RUN python -m pip install --upgrade pip
 RUN pip --version
-RUN pip install gradio torch pandas numpy torchvision wandb jupyterlab kaggle opencv-python seaborn
+RUN pip install gradio torch pandas numpy torchvision wandb jupyterlab kaggle opencv-python seaborn scipy
 #RUN conda install Pillow=9.1.0 nb_conda_kernels ipykernel tqdm jsonpickle humanfriendly numpy matplotlib opencv requests pandas seaborn>=0.11.0 PyYAML>=5.3.1 pytorch::pytorch=1.10.1 pytorch::torchvision=0.11.2 conda-forge::cudatoolkit=11.2 conda-forge::cudnn=8.1 -c conda-forge
 
 CMD /bin/bash
