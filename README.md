@@ -34,9 +34,25 @@ ToDo: find masupial.ai citation
 - authors claim that the latest model can reliably detect 72 species
 
 # Quickstart
-Pull the container from the docker hub by search for `dwheelerau/marsupial`.  
 
-The following command will create a container and run the `prediction_batch.py` script, generating a `prediction.csv` file of results (bbox information, detection class, detection probabilities), and copies of the images with bboxes added (these are saved in the directory specified by `-o`). The `-i` directory is required (ie the target directory with images you want to process). The other options can be left as defaults are provided.
+## Process camera trap images through masupial.ai (with GPU support)  
+Use the file explore navigate to the directory where your images are stored (ie Desktop\images etc). In the file path bar (circled below)
+type `cmd` to open a command prompt in this current directory.  
+
+![Type "cmd" in the file explorer window to open a terminal in the currnet directory](folder.PNG)
+
+Next we pull the megadetector image from docker, copy and paste or type the following at the command prompt.  
+If you copy the command you can paste it by right clicking on the top border of the command prompt terminal window. 
+
+```
+docker pull dwheelerau/marsupial:ubuntu2004
+```
+
+ToDo: insert instructions on pull, start, exec rather than run, as the latter will create lots of containers that will use up resources.
+
+
+This should install the docker image on your computer. To use it we need to type (or copy/paste) the following command. This command will:
+- create a container and run the `prediction_batch.py` script, generating a `prediction.csv` file of results (bbox information, detection class, detection probabilities), and copies of the images with bboxes added (these are saved in the directory specified by `-o`). The `-i` directory is required (ie the target directory with images you want to process). The other options can be left as defaults are provided.
 
 Navigate to the folder that contains your images using the windows file browser. Then open a command line environment by typing `cmd` into the file browser search bar.  
 When the command line window opens type the following (or copy and paste). The `-i` is the path to your iamges and `-o` is where the results will be saved.  
