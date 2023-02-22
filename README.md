@@ -1,5 +1,7 @@
 # Marsupial-contained
-A docker image of marsupial.ai for aussie-centric camera trap data automation. If you are new to docker I've created a [guide](https://github.com/dwheelerau/docker-guide) for running these on windows.  
+A docker image of marsupial.ai for aussie-centric camera trap data automation. If you are using windows you first need to install the Docker Desktop app, 
+this [guide](https://github.com/dwheelerau/docker-guide) for instructions. If you are using Linux just install docker using your package manager and follow the 
+terminal options below (you may need to add `sudo` to the commmands.  
 
 ## Introduction  
 This repo creates a docker image that allows users to run [Marsupial.au](https://github.com/Sydney-Informatics-Hub/marsupial) in a system agnostic way. I have also created a `prediction_batch.py` script that batch processes images contained in a target directory. The script also creates a CSV file of output information and automatically generates images with BBOX information for trouble shooting. Some more information about my marsupial.ai fork can be found [here](https://github.com/dwheelerau/marsupial.git).    
