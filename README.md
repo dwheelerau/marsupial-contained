@@ -52,9 +52,15 @@ left hand side of the screen (see below), the new image `dwheelerau/marsupial` s
 
 The next steps will create a container from the image, and we will use this container to process our camera trap images.  
 
-Back in the windows terminal window type (or copy/paste) the following command:  
+Back in the windows terminal window type (or copy/paste) the following command (**note** if you have a nvidia
+GPU on your computer read on for the command that will utilise this resource for 10x faster image processing):  
 ```
 docker run -it -d -v %cd%:/project dwheelerau/marsupial:ubuntu2004 /bin/bash
+```
+If you have a GPU the command is slightly different, use the `--gpus all` switch to make that available.  
+
+```
+docker run -it -d --gpus all -v %cd%:/project dwheelerau/marsupial:ubuntu2004 /bin/bash
 ```
 
 The above command creates a container in `-d` detacted mode and mounts our current working directory (this is why we opened our terminal from this folder)
@@ -76,9 +82,10 @@ the docker desktop or from the `docker ps -a` command)
 4) create images with boundary boxes in a new folder called "OUTPUT"
 
 You can change the paths to the input images and output images by chang the `-i` and `-o` switches in the following command:  
+
 ```
 docker exec -it sad_lamarr /bin/bash -c "cd /project && python /build/marsupial/prediction_batch.py -i TEST_INPUT -m /build/marsupial/weights/marsupial_72s.pt -o OUTPUT"
-```
+``` 
 
 If everything works the progress should be printed to screen inside the terminal. You can run or re-run the command as many times as you like, as long 
 as the container is still running (see next).  
@@ -90,12 +97,9 @@ Some additional details about the python scripts under the hood our detailed bel
 
 # Additional detail that might be of interest
 
-This should install the docker image on your computer. To use it we need to type (or copy/paste) the following command. This command will:
-- create a container and run the `prediction_batch.py` script, generating a `prediction.csv` file of results (bbox information, detection class, detection probabilities), and copies of the images with bboxes added (these are saved in the directory specified by `-o`). The `-i` directory is required (ie the target directory with images you want to process). The other options can be left as defaults are provided.
+The main script `prediction_batch.py` script generats a `prediction.csv` file of results (bbox information, detection class, detection probabilities), and copies of the images with bboxes added (these are saved in the directory specified by `-o`). The `-i` directory is required (ie the target directory with images you want to process). The other options can be left as defaults are provided.
 
-Navigate to the folder that contains your images using the windows file browser. Then open a command line environment by typing `cmd` into the file browser search bar.  
-When the command line window opens type the following (or copy and paste). The `-i` is the path to your iamges and `-o` is where the results will be saved.  
-
+You can run commands on the container directly without first starting it using the following syntax.  
 ```
 docker run --gpus all -it -v %cd%:/project dwheelerau/marsupial:ubuntu2004 /bin/bash -c "cd /project && python /build/marsupial/prediction_batch.py -i /build/marsupial/data -m /build/marsupial/weights/marsupial_72s.pt -o processed_images"
 ```
@@ -106,7 +110,7 @@ Or if you are using Linux (or WSL).
 sudo docker run --gpus all -it -v `pwd`:/project dwheelerau/marsupial:ubuntu2004 /bin/bash -c "cd /project && python /build/marsupial/prediction_batch.py -i /build/marsupial/data -m /build/marsupial/weights/marsupial_72s.pt -o processed_images"
 ```
 
-# Creating the image and running the container
+## Creating the image and running the container
 The following is not required if you pulled the container from the docker hub (above).  
 
 To build this file:  
