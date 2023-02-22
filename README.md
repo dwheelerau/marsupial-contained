@@ -15,9 +15,6 @@ marsupial_41s: This model can identify 41 species, and is a great balance betwee
 marsupial_72s: This model can identify 72 species, and is our most detailed predictor while still delivering stare of the art performance.  
 
 If you use this script you should cite the marsupial.au paper as well as Megadetector!The citation for megadetector itself is:  
-
-ToDo: find masupial.ai citation  
-
 ```
 @article{beery2019efficient,
   title={Efficient Pipeline for Camera Trap Image Review},
@@ -25,8 +22,8 @@ ToDo: find masupial.ai citation
   journal={arXiv preprint arXiv:1907.06772},
   year={2019}
 }
-
 ```
+**ToDo:** find masupial.ai citation.    
 
 ## How is Marsupial.ai different from megadetector  
 - animal detection as well as classification for common animals found in Australia
@@ -48,8 +45,50 @@ If you copy the command you can paste it by right clicking on the top border of 
 docker pull dwheelerau/marsupial:ubuntu2004
 ```
 
-ToDo: insert instructions on pull, start, exec rather than run, as the latter will create lots of containers that will use up resources.
+The download should begin and a message will be printed when the it is complete. Return to the Docker Desktop app and click on the "images" tag on the 
+left hand side of the screen (see below), the new image `dwheelerau/marsupial` should be listed.  
 
+![The installed image](dd1.png)
+
+The next steps will create a container from the image, and we will use this container to process our camera trap images.  
+
+Back in the windows terminal window type (or copy/paste) the following command:  
+```
+docker run -it -d -v %cd%:/project dwheelerau/marsupial:ubuntu2004 /bin/bash
+```
+
+The above command creates a container in `-d` detacted mode and mounts our current working directory (this is why we opened our terminal from this folder)
+inside the container (FYI the Linux mount path is `/project`.  
+
+Returning back to the Docker Desktop app, click on the "container" tab on the left hand side of the GUI. You should see a container with the image
+tag of `dwheelerau/marsupial`. Note the "Name", in the example below this is `sad_lamarr`, we use this name to run commands on the container. The status
+should also be showing "running", if it isn't just click the play button in the "Actions" section.  
+
+![The Docker Desktop container page](dd3.png)  
+
+We can confirm all of this using the terminal by typing `docker ps -a`, which should print out the available containers.  
+
+Now we are ready to execute a command. The following will:  
+1) Launch a new job in the container called  `sad_lamarr` (note yours will be called something different, so you need to replace this name with the name from
+the docker desktop or from the `docker ps -a` command)  
+2) process images in a folder in our current working directory called "TEST_INPUT" (note it will also process any images it finds inside this folder)  
+3) create a spreadsheet (XLSX) file of the results in our current working directory  
+4) create images with boundary boxes in a new folder called "OUTPUT"
+
+You can change the paths to the input images and output images by chang the `-i` and `-o` switches in the following command:  
+```
+docker exec -it sad_lamarr /bin/bash -c "cd /project && python /build/marsupial/prediction_batch.py -i TEST_INPUT -m /build/marsupial/weights/marsupial_72s.pt -o OUTPUT"
+```
+
+If everything works the progress should be printed to screen inside the terminal. You can run or re-run the command as many times as you like, as long 
+as the container is still running (see next).  
+
+Finally, when you are done, it is best to shutdown the containers as they will be consuming system resources. The easiest way is just to hit the 
+stop button in the "Actions" section of the docker desktop container page. The container should indicate that it is now "exited".  
+
+Some additional details about the python scripts under the hood our detailed below (FYI).  
+
+# Additional detail that might be of interest
 
 This should install the docker image on your computer. To use it we need to type (or copy/paste) the following command. This command will:
 - create a container and run the `prediction_batch.py` script, generating a `prediction.csv` file of results (bbox information, detection class, detection probabilities), and copies of the images with bboxes added (these are saved in the directory specified by `-o`). The `-i` directory is required (ie the target directory with images you want to process). The other options can be left as defaults are provided.
