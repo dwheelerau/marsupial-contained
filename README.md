@@ -128,3 +128,7 @@ at /project, and runs the `prediction_batch.py` script with demo settings.
 ```
 sudo docker run --gpus all -it -v `pwd`:/project dwheelerau/marsupial:ubuntu2004 /bin/bash -c "cd /project && python /build/marsupial/prediction_batch.py -i /build/marsupial/data -m /build/marsupial/weights/marsupial_72s.pt -o processed_images"
 ```
+
+## Troubleshooting  
+- an error about "invalid reference format" probably means one of your directories contains a dreaded space in the name; put double quotes around the command that refers to it
+
